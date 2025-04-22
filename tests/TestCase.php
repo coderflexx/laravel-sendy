@@ -2,9 +2,9 @@
 
 namespace Coderflex\LaravelSendy\Tests;
 
+use Coderflex\LaravelSendy\LaravelSendyServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Coderflex\LaravelSendy\LaravelSendyServiceProvider;
 
 class TestCase extends Orchestra
 {
