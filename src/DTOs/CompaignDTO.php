@@ -2,7 +2,9 @@
 
 namespace Coderflex\LaravelSendy\DTOs;
 
-class CompaignDTO
+use Spatie\LaravelData\Data;
+
+class CompaignDTO extends Data
 {
     public function __construct(
         //
