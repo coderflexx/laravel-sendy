@@ -2,7 +2,6 @@
 
 namespace Coderflex\LaravelSendy;
 
-use Coderflex\LaravelSendy\Commands\LaravelSendyCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,9 +16,6 @@ class LaravelSendyServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-sendy')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_sendy_table')
-            ->hasCommand(LaravelSendyCommand::class);
+            ->hasConfigFile();
     }
 }
