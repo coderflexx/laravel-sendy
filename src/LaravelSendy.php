@@ -80,16 +80,17 @@ class LaravelSendy
             $mainHeaders = [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer '.$this->apiKey,
             ];
 
             $headers = is_array($headers) && count($headers) > 0
                 ? array_merge($mainHeaders, $headers)
                 : $mainHeaders;
 
-            $response = $client->$type($this->apiUrl.$request, [
+            $response = $client->{$type}($this->apiUrl.$request, [
                 'headers' => $headers,
-                'body' => json_encode($data),
+                'body' => json_encode(array_merge($data, [
+                    'api_key' => $this->apiKey,
+                ])),
             ]);
 
             $responseObject = $response->getBody()->getContents();
