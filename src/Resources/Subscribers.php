@@ -9,9 +9,7 @@ class Subscribers
 {
     public function subscribe(array $data)
     {
-        $data = SubscribersDTO::from($data)->toArray();
-
-        // validate the data
+        $data = SubscribersDTO::validateAndCreate($data)->toArray();
 
         return LaravelSendy::post('subscribe', $data);
     }
