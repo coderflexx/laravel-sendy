@@ -17,9 +17,6 @@ class LaravelSendyServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-sendy')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_sendy_table')
-            ->hasCommand(LaravelSendyCommand::class);
+            ->hasConfigFile();
     }
 }
