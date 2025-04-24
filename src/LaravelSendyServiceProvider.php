@@ -2,7 +2,6 @@
 
 namespace Coderflex\LaravelSendy;
 
-use Coderflex\LaravelSendy\Commands\LaravelSendyCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
