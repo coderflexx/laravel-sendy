@@ -18,7 +18,11 @@
     "require": {
         "php": "^8.4",
         "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^10.0||^11.0||^12.0"
+        "illuminate/contracts": "^10.0||^11.0||^12.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "league/oauth2-client": "^2",
+        "guzzlehttp/guzzle": "7.x"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
