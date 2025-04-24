@@ -2,13 +2,8 @@
 
 namespace Coderflex\LaravelSendy;
 
-use Coderflex\LaravelSendy\Resources\Resources\Brands;
-use Coderflex\LaravelSendy\Resources\Resources\Campaigns;
-use Coderflex\LaravelSendy\Resources\Resources\Lists;
-use Coderflex\LaravelSendy\Resources\Resources\Subscribers;
 use Exception;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\Http;
 
 class LaravelSendy
 {
@@ -30,77 +25,75 @@ class LaravelSendy
         $this->apiUrl = config('laravel-sendy.api_url');
     }
 
-    public function subscribers(): Subscribers
+    public function subscribers(): Resources\Subscribers
     {
-        return new Subscribers;
+        return new Resources\Subscribers;
     }
 
-    public function lists(): Lists
+    public function lists(): Resources\Lists
     {
-        return new Lists;
+        return new Resources\Lists;
     }
 
-    public function brands(): Brands
+    public function brands(): Resources\Brands
     {
-        return new Brands;
+        return new Resources\Brands;
     }
 
-    public function campaigns(): Campaigns
+    public function campaigns(): Resources\Campaigns
     {
-        return new Campaigns;
+        return new Resources\Campaigns;
     }
 
-    public function __call(string $function, array $args)
+    public function __call(string $function, array $args): mixed
     {
         $options = ['get', 'post', 'put', 'delete', 'patch'];
-        $path = (isset($args[0])) ? $args[0] : null;
-        $data = (isset($args[1])) ? $args[1] : [];
-        $headers = (isset($args[2])) ? $args[2] : [];
+        $path = $args[0] ?? null;
+        $data = $args[1] ?? [];
+        $async = $args[2] ?? false;
+        $headers = $args[3] ?? [];
 
         if (! in_array($function, $options)) {
             throw new Exception("Method {$function} not found.");
         }
 
-        return self::guzzle(
+        return self::sendRequest(
             type: $function,
             request: $path,
             data: $data,
-            headers: $headers
+            headers: $headers,
+            async: $async
         );
     }
 
     /**
      * @throws \Exception
      */
-    protected function guzzle(string $type, string $request, array $data = [], array $headers = []): mixed
-    {
+    protected function sendRequest(
+        string $type,
+        string $request,
+        array $data = [],
+        array $headers = [],
+        bool $async = false
+    ): mixed {
         try {
-            $client = new Client;
-
-            $mainHeaders = [
+            $mainHeaders = array_merge([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-            ];
+            ], $headers ?? []);
 
-            $headers = is_array($headers) && count($headers) > 0
-                ? array_merge($mainHeaders, $headers)
-                : $mainHeaders;
-
-            $response = $client->{$type}($this->apiUrl.$request, [
-                'headers' => $headers,
-                'body' => json_encode(array_merge($data, [
-                    'api_key' => $this->apiKey,
-                ])),
+            $payload = array_merge($data, [
+                'api_key' => $this->apiKey,
             ]);
 
-            $responseObject = $response->getBody()->getContents();
+            $url = str_replace('//', '/', "$this->apiUrl/$request");
 
-            return $this->isJson($responseObject)
-                ? json_decode($responseObject, true)
-                : $responseObject;
+            $client = Http::withHeaders($headers);
 
-        } catch (ClientException $th) {
-            throw new Exception('Error: '.$th->getMessage());
+            return $async
+                ? $client->async()->{$type}($url, $payload)
+                : $client->{$type}($url, $payload);
+
         } catch (Exception $th) {
             throw new Exception('Error: '.$th->getMessage());
         }

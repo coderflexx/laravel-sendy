@@ -19,18 +19,18 @@ class SubscribersDTO extends Data
         public ?bool $boolean,
     ) {}
 
-    public static function rules(ValidationContext $context): array
-    {
-        return [
-            'name' => ['string', 'nullable'],
-            'email' => ['required', 'string', 'email'],
-            'list' => ['required', 'string'],
-            'country' => ['string', 'nullable'],
-            'ipaddress' => ['string', 'nullable', 'ip'],
-            'referrer' => ['string', 'nullable'],
-            'gdpr' => ['boolean', 'nullable'],
-            'silent' => ['boolean', 'nullable'],
-            'boolean' => ['boolean', 'nullable'],
-        ];
-    }
+    // public static function rules(ValidationContext $context): array
+    // {
+    //     return [
+    //         'name' => ['string', 'nullable'],
+    //         'email' => ['required', 'string', 'email'],
+    //         'list' => ['required', 'string'],
+    //         'country' => ['string', 'nullable'],
+    //         'ipaddress' => ['string', 'nullable', 'ip'],
+    //         'referrer' => ['string', 'nullable'],
+    //         'gdpr' => ['boolean', 'nullable'],
+    //         'silent' => ['boolean', 'nullable'],
+    //         'boolean' => ['boolean', 'nullable'],
+    //     ];
+    // }
 }

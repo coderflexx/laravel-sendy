@@ -1,6 +1,6 @@
 <?php
 
-namespace Coderflex\LaravelSendy\Resources\Resources;
+namespace Coderflex\LaravelSendy\Resources;
 
 use Coderflex\LaravelSendy\DTOs\CompaignDTO;
 use Coderflex\LaravelSendy\Facades\LaravelSendy;
