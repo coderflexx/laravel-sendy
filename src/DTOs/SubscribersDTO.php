@@ -2,7 +2,9 @@
 
 namespace Coderflex\LaravelSendy\DTOs;
 
-class SubscribersDTO
+use Spatie\LaravelData\Data;
+
+class SubscribersDTO extends Data
 {
     public function __construct(
         //
