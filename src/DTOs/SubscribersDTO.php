@@ -2,9 +2,11 @@
 
 namespace Coderflex\LaravelSendy\DTOs;
 
+use Spatie\LaravelData\Attributes\MergeValidationRules;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Support\Validation\ValidationContext;
 
+#[MergeValidationRules]
 class SubscribersDTO extends Data
 {
     public function __construct(
@@ -19,18 +21,11 @@ class SubscribersDTO extends Data
         public ?bool $boolean,
     ) {}
 
-    // public static function rules(ValidationContext $context): array
-    // {
-    //     return [
-    //         'name' => ['string', 'nullable'],
-    //         'email' => ['required', 'string', 'email'],
-    //         'list' => ['required', 'string'],
-    //         'country' => ['string', 'nullable'],
-    //         'ipaddress' => ['string', 'nullable', 'ip'],
-    //         'referrer' => ['string', 'nullable'],
-    //         'gdpr' => ['boolean', 'nullable'],
-    //         'silent' => ['boolean', 'nullable'],
-    //         'boolean' => ['boolean', 'nullable'],
-    //     ];
-    // }
+    public static function rules(ValidationContext $context): array
+    {
+        return [
+            'email' => ['email'],
+            'ipaddress' => ['ip'],
+        ];
+    }
 }

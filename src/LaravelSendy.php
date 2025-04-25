@@ -69,13 +69,8 @@ class LaravelSendy
     /**
      * @throws \Exception
      */
-    protected function sendRequest(
-        string $type,
-        string $request,
-        array $data = [],
-        array $headers = [],
-        bool $async = false
-    ): mixed {
+    protected function sendRequest(string $type, string $request, array $data = [], array $headers = [], bool $async = false): mixed
+    {
         try {
             $mainHeaders = array_merge([
                 'Content-Type' => 'application/json',
@@ -86,7 +81,7 @@ class LaravelSendy
                 'api_key' => $this->apiKey,
             ]);
 
-            $url = str_replace('//', '/', "$this->apiUrl/$request");
+            $url = rtrim($this->apiUrl, '/').'/'.ltrim($request, '/');
 
             $client = Http::withHeaders($headers);
 

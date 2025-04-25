@@ -22,7 +22,7 @@ it('can subscribe a user', function () {
         'country' => 'UAE',
     ]);
 
-    expect($response)->toBe(['success' => true]);
+    expect($response->json())->toBe(['success' => true]);
 
     Http::assertSent(function ($request) {
         return $request->url() === 'https://sendy.test/subscribe' &&
