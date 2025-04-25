@@ -1,56 +1,49 @@
 <?php
 
-namespace Coderflex\LaravelSendy\Resources\Resources;
+namespace Coderflex\LaravelSendy\Resources;
 
-use Coderflex\LaravelSendy\DTOs\SubscribersDTO;
+use Coderflex\LaravelSendy\DTOs\Subscribers\DeleteSubscriberDTO;
+use Coderflex\LaravelSendy\DTOs\Subscribers\SubscribeDTO;
+use Coderflex\LaravelSendy\DTOs\Subscribers\SubscriberStatusDTO;
+use Coderflex\LaravelSendy\DTOs\Subscribers\UnsubscribeDTO;
 use Coderflex\LaravelSendy\Facades\LaravelSendy;
 
 class Subscribers
 {
-    public function subscribe(array $data)
+    public function subscribe(array $data, bool $async = false)
     {
-        $data = SubscribersDTO::validateAndCreate($data)->toArray();
+        $data = SubscribeDTO::validate($data);
 
-        return LaravelSendy::post('subscribe', $data);
+        return LaravelSendy::post('subscribe', $data, $async);
     }
 
-    public function unsubscribe(int $listId, string $email, bool $plainTextResponse)
+    public function unsubscribe(array $data, bool $async = false)
     {
-        $data = http_build_query([
-            'list' => $listId,
-            'email' => $email,
-            'boolean' => $plainTextResponse,
-        ]);
+        $data = UnsubscribeDTO::validate($data);
 
-        return LaravelSendy::post('/api/subscribers/unsubscribe.php', $data);
+        return LaravelSendy::post('api/subscribers/unsubscribe.php', $data, $async);
     }
 
-    public function delete(int $listId, string $email)
+    public function delete(array $data, bool $async = false)
     {
-        $data = http_build_query([
+        $data = DeleteSubscriberDTO::validate($data);
+
+        return LaravelSendy::post('api/subscribers/delete.php', $data, $async);
+    }
+
+    public function status(array $data, bool $async = false)
+    {
+        $data = SubscriberStatusDTO::validate($data);
+
+        return LaravelSendy::post('api/subscribers/subscription-status.php', $data, $async);
+    }
+
+    public function count(int $listId, bool $async = false)
+    {
+        $data = [
             'list_id' => $listId,
-            'email' => $email,
-        ]);
+        ];
 
-        return LaravelSendy::post('/api/subscribers/delete.php', $data);
-    }
-
-    public function status(int $listId, string $email)
-    {
-        $data = http_build_query([
-            'list_id' => $listId,
-            'email' => $email,
-        ]);
-
-        return LaravelSendy::post('/api/subscribers/subscription-status.php', $data);
-    }
-
-    public function count(int $listId)
-    {
-        $data = http_build_query([
-            'list_id' => $listId,
-        ]);
-
-        return LaravelSendy::post('/api/subscribers/active-subscriber-count.php', $data);
+        return LaravelSendy::post('api/subscribers/subscriber-count.php', $data, $async);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Coderflex\LaravelSendy\Resources\Resources;
+namespace Coderflex\LaravelSendy\Resources;
 
 use Coderflex\LaravelSendy\Facades\LaravelSendy;
 
@@ -8,6 +8,6 @@ class Brands
 {
     public function get()
     {
-        return LaravelSendy::get('/api/brands/get-brands.php');
+        return LaravelSendy::post('/api/brands/get-brands.php');
     }
 }
