@@ -2,6 +2,8 @@
 
 namespace Coderflex\LaravelSendy\Concerns;
 
+use Coderflex\LaravelSendy\Exceptions\InvalidApiKeyException;
+use Coderflex\LaravelSendy\Exceptions\InvalidApiUrlException;
 use Exception;
 use Illuminate\Support\Facades\Http;
 
@@ -46,11 +48,12 @@ trait InteractsWithHttpRequests
 
             throw_if(
                 blank($apiKey),
-                new Exception('API Key is not set in the config file.')
+                InvalidApiKeyException::class,
             );
+
             throw_if(
                 blank($apiUrl),
-                new Exception('API URL is not set in the config file.')
+                InvalidApiUrlException::class,
             );
 
             $payload = array_merge($data, [
@@ -68,6 +71,10 @@ trait InteractsWithHttpRequests
                 ? $client->async()->{$type}($url, $payload)
                 : $client->{$type}($url, $payload);
 
+        } catch (InvalidApiKeyException $th) {
+            throw new InvalidApiKeyException('Error: '.$th->getMessage());
+        } catch (InvalidApiUrlException $th) {
+            throw new InvalidApiUrlException('Error: '.$th->getMessage());
         } catch (Exception $th) {
             throw new Exception('Error: '.$th->getMessage());
         }
