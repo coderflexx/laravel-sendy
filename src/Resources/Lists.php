@@ -4,15 +4,11 @@ namespace Coderflex\LaravelSendy\Resources;
 
 use Coderflex\LaravelSendy\DTOs\Lists\ListsDTO;
 use Coderflex\LaravelSendy\Facades\LaravelSendy;
+use Illuminate\Http\Client\Response;
 
 class Lists
 {
-    /**
-     * Get all lists for a specific brand.
-     *
-     * @return array
-     */
-    public function get(array $data, bool $async = false)
+    public function get(array $data, bool $async = false): Response
     {
         $data = ListsDTO::validate($data);
 

@@ -7,13 +7,6 @@ use Coderflex\LaravelSendy\Exceptions\InvalidApiUrlException;
 use Exception;
 use Illuminate\Support\Facades\Http;
 
-/**
- * @method static \Illuminate\Http\Client\Response get(string $path, array $data = [], bool $async = false, array $headers = [])
- * @method static \Illuminate\Http\Client\Response post(string $path, array $data = [], bool $async = false, array $headers = [])
- * @method static \Illuminate\Http\Client\Response put(string $path, array $data = [], bool $async = false, array $headers = [])
- * @method static \Illuminate\Http\Client\Response delete(string $path, array $data = [], bool $async = false, array $headers = [])
- * @method static \Illuminate\Http\Client\Response patch(string $path, array $data = [], bool $async = false, array $headers = [])
- */
 trait InteractsWithHttpRequests
 {
     public function __call(string $function, array $args): mixed
@@ -65,7 +58,7 @@ trait InteractsWithHttpRequests
             $client = Http::withHeaders(array_merge([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-            ], $headers ?? []));
+            ], $headers));
 
             return $async
                 ? $client->async()->{$type}($url, $payload)
