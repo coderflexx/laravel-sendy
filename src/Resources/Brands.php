@@ -8,6 +8,6 @@ class Brands
 {
     public function get()
     {
-        return LaravelSendy::get('/api/brands/get-brands.php');
+        return LaravelSendy::post('/api/brands/get-brands.php');
     }
 }
