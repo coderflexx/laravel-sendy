@@ -2,6 +2,7 @@
 
 namespace Coderflex\LaravelSendy\Resources;
 
+use Coderflex\LaravelSendy\DTOs\Lists\ListsDTO;
 use Coderflex\LaravelSendy\Facades\LaravelSendy;
 
 class Lists
@@ -11,13 +12,10 @@ class Lists
      *
      * @return array
      */
-    public function get(int $brandId, bool $includeHidden = false)
+    public function get(array $data, bool $async = false)
     {
-        $params = http_build_query([
-            'brand_id' => $brandId,
-            'include_hidden' => $includeHidden,
-        ]);
+        $data = ListsDTO::validate($data);
 
-        return LaravelSendy::get('/api/lists/get-lists.php', $params);
+        return LaravelSendy::post('/api/lists/get-lists.php', $data, $async);
     }
 }
