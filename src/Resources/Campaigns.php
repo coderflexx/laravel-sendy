@@ -9,7 +9,7 @@ class Campaigns
 {
     public function create(array $data)
     {
-        $data = CompaignDTO::validateAndCreate($data)->toArray();
+        $data = CompaignDTO::validate($data);
 
         return LaravelSendy::post('/api/campaigns/create.php', $data);
     }
