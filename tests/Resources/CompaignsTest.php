@@ -31,7 +31,7 @@ it('can create and send a campaigns', function () {
         'query_string' => null,
         'track_opens' => 1,
         'track_clicks' => 1,
-        'send_compaign' => 1,
+        'send_campaign' => 1,
         'schedule_date_time' => null,
         'schedule_timezone' => null,
     ]);
