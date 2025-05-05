@@ -109,7 +109,7 @@ $data = [
 ];
 
 $response = Sendy::subscribers()->subscribe(
-            data: $data, 
+            data: $data,
             async: false
         );
 ```
