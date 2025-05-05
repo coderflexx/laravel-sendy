@@ -3,19 +3,19 @@
 namespace Coderflex\LaravelSendy\Resources;
 
 use Coderflex\LaravelSendy\DTOs\Lists\ListsDTO;
-use Coderflex\LaravelSendy\Facades\Sendy;
+use Coderflex\LaravelSendy\Sendy;
+use Illuminate\Http\Client\Response;
 
 class Lists
 {
-    /**
-     * Get all lists for a specific brand.
-     *
-     * @return array
-     */
-    public function get(array $data, bool $async = false)
+    public function __construct(
+        protected Sendy $sendy
+    ) {}
+
+    public function get(array $data, bool $async = false): Response
     {
         $data = ListsDTO::validate($data);
 
-        return Sendy::post('/api/lists/get-lists.php', $data, $async);
+        return $this->sendy->post('/api/lists/get-lists.php', $data, $async);
     }
 }

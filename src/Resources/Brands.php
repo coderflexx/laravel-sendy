@@ -2,12 +2,17 @@
 
 namespace Coderflex\LaravelSendy\Resources;
 
-use Coderflex\LaravelSendy\Facades\Sendy;
+use Coderflex\LaravelSendy\Sendy;
+use Illuminate\Http\Client\Response;
 
 class Brands
 {
-    public function get()
+    public function __construct(
+        protected Sendy $sendy
+    ) {}
+
+    public function get(): Response
     {
-        return Sendy::post('/api/brands/get-brands.php');
+        return $this->sendy->post('/api/brands/get-brands.php');
     }
 }

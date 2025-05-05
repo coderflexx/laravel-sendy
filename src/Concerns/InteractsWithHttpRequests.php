@@ -5,6 +5,7 @@ namespace Coderflex\LaravelSendy\Concerns;
 use Coderflex\LaravelSendy\Exceptions\InvalidApiKeyException;
 use Coderflex\LaravelSendy\Exceptions\InvalidApiUrlException;
 use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Http;
  */
 trait InteractsWithHttpRequests
 {
-    public function __call(string $function, array $args): mixed
+    public function __call(string $function, array $args): Response
     {
         $options = ['get', 'post', 'put', 'delete', 'patch'];
         $path = $args[0] ?? null;
@@ -65,7 +66,7 @@ trait InteractsWithHttpRequests
             $client = Http::withHeaders(array_merge([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-            ], $headers ?? []));
+            ], $headers));
 
             return $async
                 ? $client->async()->{$type}($url, $payload)

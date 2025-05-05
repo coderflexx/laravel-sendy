@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Coderflex\LaravelSendy\Resources\Lists lists()
  * @method static \Coderflex\LaravelSendy\Resources\Brands brands()
  * @method static \Coderflex\LaravelSendy\Resources\Campaigns campaigns()
+ * @method static mixed post(string $endpoint, array $data, bool $async = false)
  */
 class Sendy extends Facade
 {
