@@ -1,6 +1,6 @@
 <?php
 
-use Coderflex\LaravelSendy\Facades\LaravelSendy;
+use Coderflex\LaravelSendy\Facades\Sendy;
 use Illuminate\Support\Facades\Http;
 
 beforeEach(function () {
@@ -15,7 +15,7 @@ it('can get subscriber brands', function () {
         'https://sendy.test/api/brands/get-brands.php' => Http::response([123 => 'Brand Name'], 200),
     ]);
 
-    $response = LaravelSendy::brands()->get();
+    $response = Sendy::brands()->get();
 
     expect($response->json())->toBe([123 => 'Brand Name']);
 

@@ -1,6 +1,6 @@
 <?php
 
-use Coderflex\LaravelSendy\Facades\LaravelSendy;
+use Coderflex\LaravelSendy\Facades\Sendy;
 use Illuminate\Support\Facades\Http;
 
 beforeEach(function () {
@@ -15,7 +15,7 @@ it('can subscribe a user', function () {
         'https://sendy.test/subscribe' => Http::response(true, 200),
     ]);
 
-    $response = LaravelSendy::subscribers()->subscribe([
+    $response = Sendy::subscribers()->subscribe([
         'name' => 'John Doe',
         'email' => 'john@example.com',
         'list' => 'abc123',
@@ -37,7 +37,7 @@ it('can unsubscribe a user', function () {
         'https://sendy.test/api/subscribers/unsubscribe.php' => Http::response(true, 200),
     ]);
 
-    $response = LaravelSendy::subscribers()->unsubscribe([
+    $response = Sendy::subscribers()->unsubscribe([
         'list' => 123,
         'email' => 'jane@example.com',
         'boolean' => true,
@@ -57,7 +57,7 @@ it('can delete a subscriber', function () {
         'https://sendy.test/api/subscribers/delete.php' => Http::response(true, 200),
     ]);
 
-    $response = LaravelSendy::subscribers()->delete([
+    $response = Sendy::subscribers()->delete([
         'list_id' => 123,
         'email' => 'john@example.com',
     ]);
@@ -74,7 +74,7 @@ it('can get subscriber status', function () {
         'https://sendy.test/api/subscribers/subscription-status.php' => Http::response(['status' => 'Subscribed'], 200),
     ]);
 
-    $response = LaravelSendy::subscribers()->status([
+    $response = Sendy::subscribers()->status([
         'list_id' => 123,
         'email' => 'john@example.com',
     ]);
@@ -87,7 +87,7 @@ it('can get subscriber count', function () {
         'https://sendy.test/api/subscribers/subscriber-count.php' => Http::response(25, 200),
     ]);
 
-    $response = LaravelSendy::subscribers()->count(123);
+    $response = Sendy::subscribers()->count(123);
 
     expect($response->json())->toBe(25);
 });

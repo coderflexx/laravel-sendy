@@ -1,6 +1,6 @@
 <?php
 
-use Coderflex\LaravelSendy\Facades\LaravelSendy;
+use Coderflex\LaravelSendy\Facades\Sendy;
 use Illuminate\Support\Facades\Http;
 
 beforeEach(function () {
@@ -15,7 +15,7 @@ it('can get subscriber lists', function () {
         'https://sendy.test/api/lists/get-lists.php' => Http::response([123 => 'Custom List'], 200),
     ]);
 
-    $response = LaravelSendy::lists()->get([
+    $response = Sendy::lists()->get([
         'brand_id' => 123,
         'include_hidden' => 'yes',
     ]);
