@@ -1,6 +1,6 @@
 <?php
 
-use Coderflex\LaravelSendy\Facades\LaravelSendy;
+use Coderflex\LaravelSendy\Facades\Sendy;
 use Illuminate\Support\Facades\Http;
 
 beforeEach(function () {
@@ -15,7 +15,7 @@ it('can create and send a campaigns', function () {
         'https://sendy.test/api/campaigns/create.php' => Http::response(['status' => 'Campaign created and now sending'], 200),
     ]);
 
-    $response = LaravelSendy::campaigns()->create([
+    $response = Sendy::campaigns()->create([
         'subject' => 'Test Subject',
         'from_name' => 'John Doe',
         'from_email' => 'john@example.com',

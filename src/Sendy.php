@@ -4,7 +4,7 @@ namespace Coderflex\LaravelSendy;
 
 use Coderflex\LaravelSendy\Concerns\InteractsWithHttpRequests;
 
-class LaravelSendy
+class Sendy
 {
     use InteractsWithHttpRequests;
 

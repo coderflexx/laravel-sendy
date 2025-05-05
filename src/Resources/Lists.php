@@ -3,7 +3,7 @@
 namespace Coderflex\LaravelSendy\Resources;
 
 use Coderflex\LaravelSendy\DTOs\Lists\ListsDTO;
-use Coderflex\LaravelSendy\Facades\LaravelSendy;
+use Coderflex\LaravelSendy\Facades\Sendy;
 
 class Lists
 {
@@ -16,6 +16,6 @@ class Lists
     {
         $data = ListsDTO::validate($data);
 
-        return LaravelSendy::post('/api/lists/get-lists.php', $data, $async);
+        return Sendy::post('/api/lists/get-lists.php', $data, $async);
     }
 }
