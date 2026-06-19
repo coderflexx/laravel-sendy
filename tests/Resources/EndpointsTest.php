@@ -1,5 +1,7 @@
 <?php
 
+use Coderflex\LaravelSendy\Exceptions\InvalidApiKeyException;
+use Coderflex\LaravelSendy\Exceptions\InvalidApiUrlException;
 use Coderflex\LaravelSendy\Facades\Sendy;
 use Illuminate\Support\Facades\Http;
 
@@ -15,7 +17,7 @@ it('throw and exception if the api key not defined', function () {
 
     $response = Sendy::brands()->get();
 
-})->throws(\Coderflex\LaravelSendy\Exceptions\InvalidApiKeyException::class);
+})->throws(InvalidApiKeyException::class);
 
 it('throw and exception if the api url not defined', function () {
     Http::fake([
@@ -29,4 +31,4 @@ it('throw and exception if the api url not defined', function () {
 
     $response = Sendy::brands()->get();
 
-})->throws(\Coderflex\LaravelSendy\Exceptions\InvalidApiUrlException::class);
+})->throws(InvalidApiUrlException::class);

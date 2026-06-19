@@ -39,7 +39,7 @@ trait InteractsWithHttpRequests
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function sendRequest(string $type, string $request, array $data = [], array $headers = [], bool $async = false): mixed
     {
