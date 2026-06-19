@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-sendy` will be documented in this file.
 
+## v1.1.0 - 2026-06-19
+
+### What's Changed
+
+- Added Laravel 13.x support
+- Added `orchestra/testbench ^11.0` and `nunomaduro/collision ^9.0`
+- Fixed `Http::fake()` boolean/integer bodies incompatible with Laravel 13
+- Updated CI matrix to cover Laravel 11/12/13 and PHP 8.3/8.4
+
+**Full Changelog**: https://github.com/coderflexx/laravel-sendy/compare/v1.0.0...v1.1.0
+
 ## v1.0.0 - 2025-05-05
 
 ### What's Changed
