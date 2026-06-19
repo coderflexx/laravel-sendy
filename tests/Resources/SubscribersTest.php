@@ -12,7 +12,7 @@ beforeEach(function () {
 
 it('can subscribe a user', function () {
     Http::fake([
-        'https://sendy.test/subscribe' => Http::response(true, 200),
+        'https://sendy.test/subscribe' => Http::response('1', 200),
     ]);
 
     $response = Sendy::subscribers()->subscribe([
@@ -34,7 +34,7 @@ it('can subscribe a user', function () {
 
 it('can unsubscribe a user', function () {
     Http::fake([
-        'https://sendy.test/api/subscribers/unsubscribe.php' => Http::response(true, 200),
+        'https://sendy.test/api/subscribers/unsubscribe.php' => Http::response('1', 200),
     ]);
 
     $response = Sendy::subscribers()->unsubscribe([
@@ -54,7 +54,7 @@ it('can unsubscribe a user', function () {
 
 it('can delete a subscriber', function () {
     Http::fake([
-        'https://sendy.test/api/subscribers/delete.php' => Http::response(true, 200),
+        'https://sendy.test/api/subscribers/delete.php' => Http::response('1', 200),
     ]);
 
     $response = Sendy::subscribers()->delete([
@@ -84,7 +84,7 @@ it('can get subscriber status', function () {
 
 it('can get subscriber count', function () {
     Http::fake([
-        'https://sendy.test/api/subscribers/subscriber-count.php' => Http::response(25, 200),
+        'https://sendy.test/api/subscribers/subscriber-count.php' => Http::response('25', 200),
     ]);
 
     $response = Sendy::subscribers()->count(123);
