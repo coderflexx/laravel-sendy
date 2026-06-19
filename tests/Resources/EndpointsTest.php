@@ -10,7 +10,7 @@ it('throw and exception if the api key not defined', function () {
     ]);
 
     Http::fake([
-        'https://sendy.test/api/brands/get-brands.php' => Http::response(true, 200),
+        'https://sendy.test/api/brands/get-brands.php' => Http::response('1', 200),
     ]);
 
     $response = Sendy::brands()->get();
@@ -19,7 +19,7 @@ it('throw and exception if the api key not defined', function () {
 
 it('throw and exception if the api url not defined', function () {
     Http::fake([
-        'https://sendy.test/api/brands/get-brands.php' => Http::response(true, 200),
+        'https://sendy.test/api/brands/get-brands.php' => Http::response('1', 200),
     ]);
 
     config([
