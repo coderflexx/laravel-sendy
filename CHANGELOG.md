@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-sendy` will be documented in this file.
 
+## v1.1.1 - 2026-07-17
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 by @dependabot[bot] in https://github.com/coderflexx/laravel-sendy/pull/18
+* Bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/coderflexx/laravel-sendy/pull/16
+* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/coderflexx/laravel-sendy/pull/14
+
+**Full Changelog**: https://github.com/coderflexx/laravel-sendy/compare/v1.1.0...v1.1.1
+
 ## v1.1.0 - 2026-06-19
 
 ### What's Changed
